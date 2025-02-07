@@ -43,6 +43,16 @@
                     const location = columns[10];
                     const tel = columns[11];
                     const availableDays = columns[15];
+                    // 曜日の文字列を整形する関数
+                    const formatDays = (days) => {
+                        if (!days) return '';
+                        return days.split('').map(day => {
+                            if (day === '日') {
+                                return `<span style="color: red;">日</span>`;
+                            }
+                            return day;
+                        }).join(' ');
+                    };
                     const startTime = columns[16];
                     const endTime = columns[17];
                     const notes = columns[18];
@@ -64,7 +74,7 @@
                             <p style="margin: 4px 0;"><strong>住所:</strong> ${address}</p>
                             <p style="margin: 4px 0;"><strong>設置場所:</strong> ${location}</p>
                             ${tel ? `<p style="margin: 4px 0;"><strong>電話番号:</strong> ${tel}</p>` : ''}
-                            ${availableDays ? `<p style="margin: 4px 0;"><strong>利用可能曜日:</strong> ${availableDays}</p>` : ''}
+                            ${availableDays ? `<p style="margin: 4px 0;"><strong>利用可能曜日:</strong> ${formatDays(availableDays)}</p>` : ''}
                             ${startTime && endTime ? `<p style="margin: 4px 0;"><strong>利用可能時間:</strong> ${startTime}〜${endTime}</p>` : ''}
                             ${notes ? `<p style="margin: 4px 0;"><strong>備考:</strong> ${notes}</p>` : ''}
                         </div>
